@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One Recording, Many Cameras</title>
+  <meta name="description" content="Audio-grounded novel-view synthesis for dialogue re-cinematography. Synthesize cinematic multi-camera coverage from a single recorded take." />
+  <meta name="author" content="Anonymous Author(s)" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css?v=yt" />
+</head>
+<body>
+  <main>
+    <header class="title">
+      <div class="wrap">
+        <h1>One Recording, Many Cameras</h1>
+        <p class="subtitle">Audio-Grounded Novel-View Synthesis for Dialogue Re-Cinematography</p>
+        <p class="authors">Anonymous Author(s)</p>
+      </div>
+    </header>
+
+    <section id="abstract">
+      <div class="wrap">
+        <h2>Abstract</h2>
+        <div class="prose">
+          <p>Dialogue video editing relies on multiple camera views to cut between speakers. Capturing such coverage is costly and often unavailable. We introduce <strong>dialogue re-cinematography</strong>, the task of synthesizing missing cinematic coverage from a single source dialogue video recording. Unlike existing novel-view video generation methods, dialogue re-cinematography must preserve the recorded speech, timing, gestures, and reactions under substantial viewpoint changes. This is challenging because novel viewpoints expose facial regions that are unseen in the source recording, requiring the model to hallucinate realistic appearance and motions for these regions. But, speech audio is invariant to viewpoint. Therefore, our approach is to treat this audio as a common anchor linking all possible views of a recorded performance. This viewpoint-independent representation enables consistent lip articulation even when the target view reveals facial regions that are entirely unseen in the source recording. We combine this audio anchor with source-video conditioning, which preserves the recorded timing, gestures, and reactions, while a target-view reference image specifies the desired novel viewpoint. Since naively applying audio guidance can animate silent participants in multi-person scenes, we introduce speaker-aware audio gating that selectively suppresses audio conditioning for non-speaking faces. Experiments on paired multi-view dialogue data and in-the-wild videos demonstrate that our approach synthesizes faithful cinematic coverage, improving lip synchronization on heavily occluded faces by over 40% and reducing false speech animation on silent listeners by over 70%, enabling multi-shot dialogue coverage from a single recorded take.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="coverage">
+      <div class="wrap demo-wrap">
+        <h2>Interactive demo</h2>
+        <p class="lede">Click a camera to switch views. Click the monitor to play or pause.</p>
+        <div class="demo-shell">
+          <div class="demo-bar">
+            <div class="scene-tabs" role="tablist" aria-label="Source scene">
+              <button type="button" class="scene-tab on" role="tab" aria-selected="true" data-scene="harry">When Harry Met Sally</button>
+              <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="moonrise">Moonrise Kingdom</button>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="monitor">
+              <div class="screen is-paused" id="monitor-screen">
+                <video id="monitor-video" playsinline loop muted preload="auto" poster="videos/demo_scenes/harry/source.jpg" src="videos/demo_scenes/harry/two-shot.mp4?v=4s"></video>
+                <img id="monitor-still" alt="" src="videos/demo_scenes/harry/source.jpg" />
+                <div class="screen-hud"><span id="hud-code">Source</span></div>
+                <span class="screen-play" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="plot">
+              <svg viewBox="0 78 400 262" role="img" aria-label="Camera plot">
+                <defs>
+                  <filter id="cam-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="1.4" flood-color="#000" flood-opacity="0.14"/>
+                  </filter>
+                </defs>
+                <rect x="0" y="78" width="400" height="262" rx="16" fill="#fff"/>
+                <ellipse cx="200" cy="170" rx="92" ry="70" fill="#f5f5f7"/>
+
+                <circle cx="168" cy="170" r="15" fill="#1d1d1f"/>
+                <text x="168" y="174" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">A</text>
+                <circle cx="232" cy="170" r="15" fill="#6e6e73"/>
+                <text x="232" y="174" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">B</text>
+
+                <path class="cone show" data-shot="two-shot" d="M200 292 L168 188 L232 188 Z"/>
+                <path class="cone" data-shot="ots-a" d="M88 236 L186 148 L230 192 Z"/>
+                <path class="cone" data-shot="cu-b" d="M128 208 L210 148 L238 186 Z"/>
+                <path class="cone" data-shot="ots-b" d="M312 236 L214 148 L170 192 Z"/>
+                <path class="cone" data-shot="cu-a" d="M272 208 L190 148 L162 186 Z"/>
+
+                <g class="cam source-cam active" data-shot="two-shot" tabindex="0" role="button" aria-label="Source">
+                  <circle class="cam-body" cx="200" cy="292" r="11" filter="url(#cam-shadow)"/>
+                  <text x="216" y="296" text-anchor="start">Source</text>
+                </g>
+                <g class="cam" data-shot="ots-a" tabindex="0" role="button" aria-label="OTS A">
+                  <circle class="cam-body" cx="88" cy="236" r="10" filter="url(#cam-shadow)"/>
+                  <text x="74" y="240" text-anchor="end">OTS A</text>
+                </g>
+                <g class="cam" data-shot="cu-b" tabindex="0" role="button" aria-label="CU B">
+                  <circle class="cam-body" cx="128" cy="208" r="10" filter="url(#cam-shadow)"/>
+                  <text x="114" y="212" text-anchor="end">CU B</text>
+                </g>
+                <g class="cam" data-shot="ots-b" tabindex="0" role="button" aria-label="OTS B">
+                  <circle class="cam-body" cx="312" cy="236" r="10" filter="url(#cam-shadow)"/>
+                  <text x="326" y="240" text-anchor="start">OTS B</text>
+                </g>
+                <g class="cam" data-shot="cu-a" tabindex="0" role="button" aria-label="CU A">
+                  <circle class="cam-body" cx="272" cy="208" r="10" filter="url(#cam-shadow)"/>
+                  <text x="286" y="212" text-anchor="start">CU A</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="wrap wide">
+        <h2>Comparisons</h2>
+        <div id="compare-list" class="compare-list"></div>
+      </div>
+    </section>
+  </main>
+  <script src="js/main.js?v=yt"></script>
+</body>
+</html>
