@@ -1,11 +1,27 @@
 const SCENES = {
   harry: {
-    title: "When Harry Met Sally",
+    title: "When Harry Met Sally (1989)",
     base: "videos/demo_scenes/harry",
   },
   moonrise: {
-    title: "Moonrise Kingdom",
+    title: "Moonrise Kingdom (2012)",
     base: "videos/demo_scenes/moonrise",
+  },
+  sunset: {
+    title: "Before Sunset (2004)",
+    base: "videos/demo_scenes/sunset",
+  },
+  sunshine: {
+    title: "Eternal Sunshine (2004)",
+    base: "videos/demo_scenes/sunshine",
+  },
+  verdict: {
+    title: "The Verdict (1982)",
+    base: "videos/demo_scenes/verdict",
+  },
+  sunrise: {
+    title: "Before Sunrise (1995)",
+    base: "videos/demo_scenes/sunrise",
   },
 };
 

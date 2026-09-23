@@ -123,23 +123,24 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 24px 4px;
+  padding: 16px 16px 4px;
 }
 
 .scene-tabs {
-  display: inline-flex;
-  padding: 3px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100%;
 }
 
 .scene-tab {
   border: 0;
-  border-radius: 8px;
-  background: transparent;
+  border-radius: 980px;
+  background: #fff;
   color: var(--muted);
   min-height: 32px;
-  padding: 0 16px;
+  padding: 0 14px;
   font: inherit;
   font-size: 13px;
   font-weight: 500;
@@ -148,9 +149,9 @@ h3 {
 }
 
 .scene-tab.on {
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
 }
 
 .demo-meta {
@@ -485,6 +486,19 @@ h3 {
 
 .compare-cell.ours figcaption {
   color: var(--ink);
+}
+
+.disclaimer {
+  padding: 48px 0 64px;
+  border-top: 1px solid var(--line);
+}
+
+.disclaimer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
 }
 
 @media (max-width: 800px) {
