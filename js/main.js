@@ -15,6 +15,14 @@ const SCENES = {
     title: "The Verdict (1982)",
     base: "videos/demo_scenes/verdict",
   },
+  lalaland: {
+    title: "La La Land (2016)",
+    base: "videos/demo_scenes/lalaland",
+  },
+  hsm: {
+    title: "High School Musical 2 (2007)",
+    base: "videos/demo_scenes/hsm",
+  },
 };
 
 const SHOTS = {
@@ -40,12 +48,12 @@ function sceneBase() {
 }
 
 function shotVideo(id) {
-  return `${sceneBase()}/${id}.mp4?v=4s`;
+  return `${sceneBase()}/${id}.mp4?v=hsmots`;
 }
 
 function shotStill(id) {
-  if (id === "two-shot") return `${sceneBase()}/source.jpg`;
-  return `${sceneBase()}/${id}.png`;
+  if (id === "two-shot") return `${sceneBase()}/source.jpg?v=hsmots`;
+  return `${sceneBase()}/${id}.png?v=hsmots`;
 }
 
 function syncPaused() {
