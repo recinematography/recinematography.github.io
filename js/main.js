@@ -39,7 +39,7 @@ const hudCode = document.getElementById("hud-code");
 
 let currentScene = "harry";
 let currentShot = "two-shot";
-let wantPlay = true;
+let wantPlay = false;
 let holdTime = 0;
 let loadToken = 0;
 
@@ -48,12 +48,12 @@ function sceneBase() {
 }
 
 function shotVideo(id) {
-  return `${sceneBase()}/${id}.mp4?v=hsmots`;
+  return `${sceneBase()}/${id}.mp4?v=demoplay`;
 }
 
 function shotStill(id) {
-  if (id === "two-shot") return `${sceneBase()}/source.jpg?v=hsmots`;
-  return `${sceneBase()}/${id}.png?v=hsmots`;
+  if (id === "two-shot") return `${sceneBase()}/source.jpg?v=demoplay`;
+  return `${sceneBase()}/${id}.png?v=demoplay`;
 }
 
 function syncPaused() {
@@ -83,14 +83,19 @@ function loadMedia() {
   const src = shotVideo(currentShot);
   videoEl.hidden = false;
   videoEl.poster = shotStill(currentShot);
-  videoEl.muted = true;
+  videoEl.muted = !wantPlay;
   const onReady = () => {
     if (token !== loadToken) return;
     try {
-      if (holdTime) videoEl.currentTime = Math.min(holdTime, videoEl.duration || holdTime);
+      videoEl.currentTime = Math.min(holdTime, videoEl.duration || holdTime);
     } catch (_) {}
-    if (wantPlay) videoEl.play().catch(() => { wantPlay = false; }).finally(syncPaused);
-    else syncPaused();
+    if (wantPlay) {
+      videoEl.muted = false;
+      videoEl.play().catch(() => {}).finally(syncPaused);
+    } else {
+      videoEl.pause();
+      syncPaused();
+    }
   };
   videoEl.onloadeddata = onReady;
   videoEl.onerror = () => {
@@ -116,6 +121,11 @@ function setScene(id) {
   if (!SCENES[id]) return;
   currentScene = id;
   holdTime = 0;
+  wantPlay = false;
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.muted = true;
+  }
   document.querySelectorAll(".scene-tab").forEach((tab) => {
     const on = tab.dataset.scene === id;
     tab.classList.toggle("on", on);
