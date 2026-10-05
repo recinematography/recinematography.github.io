@@ -7,9 +7,9 @@
   <meta name="description" content="Audio-grounded novel-view synthesis for dialogue re-cinematography. Synthesize cinematic multi-camera coverage from a single recorded take." />
   <meta name="author" content="Anonymous Author(s)" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="css/style.css?v=terms" />
+  <link rel="stylesheet" href="css/style.css?v=fix117" />
 </head>
-<body>
+<body class="page-public">
   <main>
     <header class="title">
       <div class="wrap">
@@ -30,71 +30,163 @@
 
     <section id="coverage">
       <div class="wrap demo-wrap">
-        <h2>Interactive demo</h2>
-        <p class="lede">Click a camera to switch views. Click the monitor to play or pause.</p>
+        <div class="demo-heading">
+          <h2>Interactive demo</h2>
+          <p class="lede">Click a camera to switch views · click the monitor to play or pause.</p>
+        </div>
         <div class="demo-shell">
           <div class="demo-bar">
-            <div class="scene-tabs" role="tablist" aria-label="Source scene">
-              <button type="button" class="scene-tab on" role="tab" aria-selected="true" data-scene="harry">When Harry Met Sally (1989)</button>
-              <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="moonrise">Moonrise Kingdom (2012)</button>
-              <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="sunshine">Eternal Sunshine (2004)</button>
-              <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="verdict">The Verdict (1982)</button>
-              <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="lalaland">La La Land (2016)</button>
-              <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="hsm">High School Musical 2 (2007)</button>
+            <div class="scene-tabs scene-tabs--grouped" role="tablist" aria-label="Source scene" data-default-scene="up1">
+              <div class="scene-tab-row">
+                <div class="scene-group" role="presentation">
+                  <span class="scene-group-label">Conversation</span>
+                  <div class="scene-group-tabs">
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="couch2">Breakfast at Tiffany's (1961)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="harry">When Harry Met Sally (1989)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="twinpeaks">Twin Peaks (1990)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="sunshine">Eternal Sunshine of the Spotless Mind (2004)</button>
+                  </div>
+                </div>
+                <div class="scene-group" role="presentation">
+                  <span class="scene-group-label">Cartoons</span>
+                  <div class="scene-group-tabs">
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="panda">Kung Fu Panda (2008)</button>
+                    <button type="button" class="scene-tab on" role="tab" aria-selected="true" data-scene="up1">Up (2009)</button>
+                  </div>
+                </div>
+              </div>
+              <div class="scene-tab-row">
+                <div class="scene-group" role="presentation">
+                  <span class="scene-group-label">Singing</span>
+                  <div class="scene-group-tabs">
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="stagebw">West Side Story (1961)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="favorite">The Sound of Music — My Favorite Things (1965)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="hsm">High School Musical 2 (2007)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="lalaland">La La Land (2016)</button>
+                  </div>
+                </div>
+                <div class="scene-group" role="presentation">
+                  <span class="scene-group-label">Dance</span>
+                  <div class="scene-group-tabs">
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="singin2">Singin' in the Rain — Duet (1952)</button>
+                    <button type="button" class="scene-tab" role="tab" aria-selected="false" data-scene="couch1">Singin' in the Rain — Good Morning (1952)</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="demo-grid">
             <div class="monitor">
-              <div class="screen is-paused" id="monitor-screen">
-                <video id="monitor-video" playsinline loop muted preload="auto" poster="videos/demo_scenes/harry/source.jpg" src="videos/demo_scenes/harry/two-shot.mp4?v=demoplay"></video>
-                <img id="monitor-still" alt="" src="videos/demo_scenes/harry/source.jpg" />
-                <div class="screen-hud"><span id="hud-code">Source</span></div>
-                <span class="screen-play" aria-hidden="true"></span>
+              <div class="monitor-stack">
+                <div class="screen is-paused" id="monitor-screen">
+                  <video id="monitor-video" playsinline loop muted preload="auto" poster="videos/demo_scenes/up1/source.jpg" src="videos/demo_scenes/up1/two-shot.mp4?v=fix113"></video>
+                  <img id="monitor-still" alt="" src="videos/demo_scenes/up1/source.jpg" />
+                  <div class="screen-hud"><span id="hud-code">Source</span></div>
+                  <span class="screen-play" aria-hidden="true"></span>
+                </div>
+                <p id="monitor-caption" class="monitor-caption">Up (2009)</p>
               </div>
             </div>
             <div class="plot">
-              <svg viewBox="0 78 400 262" role="img" aria-label="Camera plot">
+              <svg id="camera-plot" viewBox="0 78 400 262" role="img" aria-label="Camera plot">
                 <defs>
                   <filter id="cam-shadow" x="-50%" y="-50%" width="200%" height="200%">
                     <feDropShadow dx="0" dy="1" stdDeviation="1.4" flood-color="#000" flood-opacity="0.14"/>
                   </filter>
+                  <linearGradient id="cone-grad-two-shot" gradientUnits="userSpaceOnUse" x1="200" y1="292" x2="200" y2="129">
+                    <stop offset="0%" stop-color="#0071e3" stop-opacity="0.28"/>
+                    <stop offset="70%" stop-color="#0071e3" stop-opacity="0.10"/>
+                    <stop offset="100%" stop-color="#0071e3" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="cone-grad-ots-b" gradientUnits="userSpaceOnUse" x1="88" y1="236" x2="208" y2="170">
+                    <stop offset="0%" stop-color="#0071e3" stop-opacity="0.28"/>
+                    <stop offset="70%" stop-color="#0071e3" stop-opacity="0.10"/>
+                    <stop offset="100%" stop-color="#0071e3" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="cone-grad-cu-b" gradientUnits="userSpaceOnUse" x1="128" y1="208" x2="274" y2="155">
+                    <stop offset="0%" stop-color="#0071e3" stop-opacity="0.28"/>
+                    <stop offset="70%" stop-color="#0071e3" stop-opacity="0.10"/>
+                    <stop offset="100%" stop-color="#0071e3" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="cone-grad-ots-a" gradientUnits="userSpaceOnUse" x1="312" y1="236" x2="192" y2="170">
+                    <stop offset="0%" stop-color="#0071e3" stop-opacity="0.28"/>
+                    <stop offset="70%" stop-color="#0071e3" stop-opacity="0.10"/>
+                    <stop offset="100%" stop-color="#0071e3" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="cone-grad-cu-a" gradientUnits="userSpaceOnUse" x1="272" y1="208" x2="126" y2="155">
+                    <stop offset="0%" stop-color="#0071e3" stop-opacity="0.28"/>
+                    <stop offset="70%" stop-color="#0071e3" stop-opacity="0.10"/>
+                    <stop offset="100%" stop-color="#0071e3" stop-opacity="0"/>
+                  </linearGradient>
                 </defs>
                 <rect x="0" y="78" width="400" height="262" rx="16" fill="#fff"/>
-                <ellipse cx="200" cy="170" rx="92" ry="70" fill="#f5f5f7"/>
+                <ellipse id="plot-floor" cx="200" cy="170" rx="92" ry="70" fill="#f5f5f7"/>
 
-                <circle cx="168" cy="170" r="15" fill="#1d1d1f"/>
-                <text x="168" y="174" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">A</text>
-                <circle cx="232" cy="170" r="15" fill="#6e6e73"/>
-                <text x="232" y="174" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">B</text>
+                <g id="plot-subjects">
+                  <circle id="plot-subj-a" cx="168" cy="170" r="15" fill="#1d1d1f"/>
+                  <text id="plot-subj-a-label" x="168" y="174" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">A</text>
+                  <circle id="plot-subj-b" cx="232" cy="170" r="15" fill="#6e6e73"/>
+                  <text id="plot-subj-b-label" x="232" y="174" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, Helvetica, sans-serif">B</text>
+                </g>
 
-                <path class="cone show" data-shot="two-shot" d="M200 292 L168 188 L232 188 Z"/>
-                <path class="cone" data-shot="ots-a" d="M88 236 L186 148 L230 192 Z"/>
-                <path class="cone" data-shot="cu-b" d="M128 208 L210 148 L238 186 Z"/>
-                <path class="cone" data-shot="ots-b" d="M312 236 L214 148 L170 192 Z"/>
-                <path class="cone" data-shot="cu-a" d="M272 208 L190 148 L162 186 Z"/>
+                <path class="cone show" data-shot="two-shot" fill="url(#cone-grad-two-shot)" d="M125 129 L200 292 L275 129"/>
+                <path class="cone" data-shot="ots-b" fill="url(#cone-grad-ots-b)" d="M186 148 L88 236 L230 192"/>
+                <path class="cone" data-shot="cu-b" fill="url(#cone-grad-cu-b)" d="M263 124 L128 208 L285 186"/>
+                <path class="cone" data-shot="ots-a" fill="url(#cone-grad-ots-a)" d="M214 148 L312 236 L170 192"/>
+                <path class="cone" data-shot="cu-a" fill="url(#cone-grad-cu-a)" d="M115 186 L272 208 L137 124"/>
 
                 <g class="cam source-cam active" data-shot="two-shot" tabindex="0" role="button" aria-label="Source">
-                  <circle class="cam-body" cx="200" cy="292" r="11" filter="url(#cam-shadow)"/>
-                  <text x="216" y="296" text-anchor="start">Source</text>
-                </g>
-                <g class="cam" data-shot="ots-a" tabindex="0" role="button" aria-label="OTS A">
-                  <circle class="cam-body" cx="88" cy="236" r="10" filter="url(#cam-shadow)"/>
-                  <text x="74" y="240" text-anchor="end">OTS A</text>
-                </g>
-                <g class="cam" data-shot="cu-b" tabindex="0" role="button" aria-label="CU B">
-                  <circle class="cam-body" cx="128" cy="208" r="10" filter="url(#cam-shadow)"/>
-                  <text x="114" y="212" text-anchor="end">CU B</text>
+                  <circle class="cam-hit" cx="200" cy="292" r="16"/>
+                  <g class="cam-icon" filter="url(#cam-shadow)" transform="translate(200,292) rotate(-90) scale(1.12)">
+                    <rect class="cam-body" x="-7.5" y="-4.5" width="10" height="9" rx="1.6"/>
+                    <path class="cam-body" d="M2.3 -2.05 L8.1 -4.55 C8.5 -4.75 8.9 -4.55 8.9 -4.05 L8.9 4.05 C8.9 4.55 8.5 4.75 8.1 4.55 L2.3 2.05 Z"/>
+                    <path class="cam-body" d="M-5.2 -4.5 L-5.2 -7.55 C-5.2 -8.1 -4.8 -8.45 -4.25 -8.45 L-1.55 -8.45 C-1 -8.45 -0.6 -8.1 -0.6 -7.55 L-0.6 -4.5 L-1.95 -4.5 L-1.95 -6.6 L-3.85 -6.6 L-3.85 -4.5 Z"/>
+                    <rect class="cam-body" x="-9.3" y="-1.55" width="2.1" height="3.1" rx="0.5"/>
+                  </g>
+                  <text class="cam-label" x="216" y="296" text-anchor="start">Source</text>
                 </g>
                 <g class="cam" data-shot="ots-b" tabindex="0" role="button" aria-label="OTS B">
-                  <circle class="cam-body" cx="312" cy="236" r="10" filter="url(#cam-shadow)"/>
-                  <text x="326" y="240" text-anchor="start">OTS B</text>
+                  <circle class="cam-hit" cx="88" cy="236" r="16"/>
+                  <g class="cam-icon" filter="url(#cam-shadow)" transform="translate(88,236) rotate(-24.6)">
+                    <rect class="cam-body" x="-7.5" y="-4.5" width="10" height="9" rx="1.6"/>
+                    <path class="cam-body" d="M2.3 -2.05 L8.1 -4.55 C8.5 -4.75 8.9 -4.55 8.9 -4.05 L8.9 4.05 C8.9 4.55 8.5 4.75 8.1 4.55 L2.3 2.05 Z"/>
+                    <path class="cam-body" d="M-5.2 -4.5 L-5.2 -7.55 C-5.2 -8.1 -4.8 -8.45 -4.25 -8.45 L-1.55 -8.45 C-1 -8.45 -0.6 -8.1 -0.6 -7.55 L-0.6 -4.5 L-1.95 -4.5 L-1.95 -6.6 L-3.85 -6.6 L-3.85 -4.5 Z"/>
+                    <rect class="cam-body" x="-9.3" y="-1.55" width="2.1" height="3.1" rx="0.5"/>
+                  </g>
+                  <text class="cam-label" x="74" y="240" text-anchor="end">OTS B</text>
+                </g>
+                <g class="cam" data-shot="cu-b" tabindex="0" role="button" aria-label="CU B">
+                  <circle class="cam-hit" cx="128" cy="208" r="16"/>
+                  <g class="cam-icon" filter="url(#cam-shadow)" transform="translate(128,208) rotate(-20.1)">
+                    <rect class="cam-body" x="-7.5" y="-4.5" width="10" height="9" rx="1.6"/>
+                    <path class="cam-body" d="M2.3 -2.05 L8.1 -4.55 C8.5 -4.75 8.9 -4.55 8.9 -4.05 L8.9 4.05 C8.9 4.55 8.5 4.75 8.1 4.55 L2.3 2.05 Z"/>
+                    <path class="cam-body" d="M-5.2 -4.5 L-5.2 -7.55 C-5.2 -8.1 -4.8 -8.45 -4.25 -8.45 L-1.55 -8.45 C-1 -8.45 -0.6 -8.1 -0.6 -7.55 L-0.6 -4.5 L-1.95 -4.5 L-1.95 -6.6 L-3.85 -6.6 L-3.85 -4.5 Z"/>
+                    <rect class="cam-body" x="-9.3" y="-1.55" width="2.1" height="3.1" rx="0.5"/>
+                  </g>
+                  <text class="cam-label" x="114" y="212" text-anchor="end">CU B</text>
+                </g>
+                <g class="cam" data-shot="ots-a" tabindex="0" role="button" aria-label="OTS A">
+                  <circle class="cam-hit" cx="312" cy="236" r="16"/>
+                  <g class="cam-icon" filter="url(#cam-shadow)" transform="translate(312,236) rotate(-155.4)">
+                    <rect class="cam-body" x="-7.5" y="-4.5" width="10" height="9" rx="1.6"/>
+                    <path class="cam-body" d="M2.3 -2.05 L8.1 -4.55 C8.5 -4.75 8.9 -4.55 8.9 -4.05 L8.9 4.05 C8.9 4.55 8.5 4.75 8.1 4.55 L2.3 2.05 Z"/>
+                    <path class="cam-body" d="M-5.2 -4.5 L-5.2 -7.55 C-5.2 -8.1 -4.8 -8.45 -4.25 -8.45 L-1.55 -8.45 C-1 -8.45 -0.6 -8.1 -0.6 -7.55 L-0.6 -4.5 L-1.95 -4.5 L-1.95 -6.6 L-3.85 -6.6 L-3.85 -4.5 Z"/>
+                    <rect class="cam-body" x="-9.3" y="-1.55" width="2.1" height="3.1" rx="0.5"/>
+                  </g>
+                  <text class="cam-label" x="326" y="240" text-anchor="start">OTS A</text>
                 </g>
                 <g class="cam" data-shot="cu-a" tabindex="0" role="button" aria-label="CU A">
-                  <circle class="cam-body" cx="272" cy="208" r="10" filter="url(#cam-shadow)"/>
-                  <text x="286" y="212" text-anchor="start">CU A</text>
+                  <circle class="cam-hit" cx="272" cy="208" r="16"/>
+                  <g class="cam-icon" filter="url(#cam-shadow)" transform="translate(272,208) rotate(-159.9)">
+                    <rect class="cam-body" x="-7.5" y="-4.5" width="10" height="9" rx="1.6"/>
+                    <path class="cam-body" d="M2.3 -2.05 L8.1 -4.55 C8.5 -4.75 8.9 -4.55 8.9 -4.05 L8.9 4.05 C8.9 4.55 8.5 4.75 8.1 4.55 L2.3 2.05 Z"/>
+                    <path class="cam-body" d="M-5.2 -4.5 L-5.2 -7.55 C-5.2 -8.1 -4.8 -8.45 -4.25 -8.45 L-1.55 -8.45 C-1 -8.45 -0.6 -8.1 -0.6 -7.55 L-0.6 -4.5 L-1.95 -4.5 L-1.95 -6.6 L-3.85 -6.6 L-3.85 -4.5 Z"/>
+                    <rect class="cam-body" x="-9.3" y="-1.55" width="2.1" height="3.1" rx="0.5"/>
+                  </g>
+                  <text class="cam-label" x="286" y="212" text-anchor="start">CU A</text>
                 </g>
               </svg>
-              <p class="demo-legend"><strong>OTS</strong> over-the-shoulder &nbsp;·&nbsp; <strong>CU</strong> close-up</p>
+              <p class="demo-legend" id="demo-legend"><strong>OTS</strong> over-the-shoulder &nbsp;·&nbsp; <strong>CU</strong> close-up</p>
             </div>
           </div>
         </div>
@@ -113,6 +205,12 @@
       <p>This page is for academic research and demonstration only. All film clips and stills remain the property of their respective copyright holders, studios, and producers. No copyright is claimed in the underlying works.</p>
     </div>
   </footer>
-  <script src="js/main.js?v=demoplay"></script>
+  <script>
+    window.DEMO_CONFIG = {
+      defaultScene: "up1",
+      scenes: ["up1", "panda", "singin2", "couch1", "hsm", "lalaland", "favorite", "stagebw", "couch2", "twinpeaks", "harry", "sunshine"],
+    };
+  </script>
+  <script src="js/main.js?v=fix117"></script>
 </body>
 </html>
