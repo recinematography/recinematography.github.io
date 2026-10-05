@@ -1196,7 +1196,6 @@ h3 {
   .screen-play {
     width: 56px;
     height: 56px;
-    opacity: 1;
   }
 
   .screen.is-paused .screen-play {
